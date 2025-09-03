@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pizzaria Delícia - Faça seu pedido</title>
   <style>
+    /* Estilos básicos */
     * {
       box-sizing: border-box;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+
     body {
       background: #fff8f0;
       color: #333;
@@ -18,6 +22,7 @@
       padding: 1rem 2rem;
       line-height: 1.5;
     }
+
     header {
       background: #d32f2f;
       padding: 1rem 2rem;
@@ -26,12 +31,15 @@
       margin-bottom: 2rem;
       text-align: center;
     }
+
     header h1 {
       font-size: 1.8rem;
     }
+
     nav {
       margin-top: 0.5rem;
     }
+
     nav a {
       color: white;
       text-decoration: none;
@@ -39,20 +47,24 @@
       font-weight: 600;
       transition: color 0.3s;
     }
+
     nav a:hover {
       color: #ffb74d;
     }
+
     form {
       background: white;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
     }
+
     label {
       display: block;
       margin-bottom: 0.6rem;
       font-weight: 600;
     }
+
     input[type="text"],
     input[type="email"],
     select,
@@ -65,10 +77,12 @@
       font-size: 1rem;
       font-family: inherit;
     }
+
     textarea {
       resize: vertical;
       min-height: 80px;
     }
+
     button {
       background: #d32f2f;
       color: white;
@@ -80,9 +94,40 @@
       transition: background 0.3s;
       width: 100%;
     }
+
     button:hover {
       background: #b71c1c;
     }
+
+    /* Estilos do modal */
+    .modal {
+      display: none;
+      /* Esconde o modal inicialmente */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Fundo escuro */
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .close {
+      color: red;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
     @media (max-width: 600px) {
       body {
         margin: 1rem;
@@ -91,7 +136,49 @@
     }
   </style>
 </head>
+
 <body>
+
+  <!-- Modal para personalizar a pizza -->
+  <div id="pizzaModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalBtn">&times;</span>
+      <h2>Personalize sua pizza</h2>
+
+      <label for="massa">Escolha a Massa (Borda)</label>
+      <select id="massa">
+        <option value="Crocante">Crocante</option>
+        <option value="Normal">Normal</option>
+        <option value="Recheada">Recheada</option>
+      </select>
+
+      <label for="tamanho">Escolha o Tamanho</label>
+      <select id="tamanho">
+        <option value="Pequena">Pequena</option>
+        <option value="Média">Média</option>
+        <option value="Grande">Grande</option>
+      </select>
+
+      <label for="molho">Escolha o Molho</label>
+      <select id="molho">
+        <option value="Tomate">Tomate</option>
+        <option value="Barbecue">Barbecue</option>
+        <option value="Branco">Branco</option>
+      </select>
+
+      <label>Coberturas</label>
+      <div>
+        <input type="checkbox" id="queijo" /> Queijo
+        <input type="checkbox" id="calabresa" /> Calabresa
+        <input type="checkbox" id="napolitana" /> Napolitana
+        <input type="checkbox" id="frango" /> Frango
+        <input type="checkbox" id="portuguesa" /> Portuguesa
+      </div>
+
+      <button id="finalizarPedidoBtn">Finalizar Pedido</button>
+    </div>
+  </div>
+
   <header>
     <h1>Pizzaria Delícia</h1>
     <nav>
@@ -119,7 +206,14 @@
         <option value="Portuguesa">Portuguesa - R$45,00</option>
         <option value="Frango com Catupiry">Frango com Catupiry - R$42,00</option>
         <option value="Vegetariana">Vegetariana - R$38,00</option>
+        <option value="Customizada">Á moda do Cliente - R$50,00</option>
       </select>
+
+      <div class="">
+
+      </div>
+
+      <div id="result"></div>
 
       <label for="quantidade">Quantidade</label>
       <input type="number" id="quantidade" name="quantidade" min="1" max="10" value="1" required />
@@ -132,25 +226,137 @@
   </main>
 
   <script>
-    const form = document.getElementById('pedidoForm');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    // Manipulação do Modal
+    const pizzaModal = document.getElementById("pizzaModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const finalizarPedidoBtn = document.getElementById("finalizarPedidoBtn");
+    const resultDiv = document.getElementById("result");
+    const pizzaSelect = document.getElementById('pizza');
 
-      const nome = form.nome.value.trim();
-      const email = form.email.value.trim();
-      const pizza = form.pizza.value;
-      const quantidade = form.quantidade.value;
-      const observacoes = form.observacoes.value.trim();
+    // Exibir o modal ao escolher "Customizada"
+    pizzaSelect.addEventListener('change', function () {
+      if (pizzaSelect.value === 'Customizada') {
+        pizzaModal.style.display = 'flex'; // Exibe o modal
+      } else {
+        pizzaModal.style.display = 'none'; // Esconde o modal
+      }
+    });
 
-      if (!nome || !email || !pizza || !quantidade) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
+    // Fechar o modal
+    closeModalBtn.addEventListener('click', function () {
+      pizzaModal.style.display = "none";
+    });
+
+    // Fechar o modal clicando fora dele
+    window.addEventListener('click', function (event) {
+      if (event.target === pizzaModal) {
+        pizzaModal.style.display = "none";
+      }
+    });
+
+    // Finalizar pedido
+    finalizarPedidoBtn.addEventListener('click', function () {
+      const massa = document.getElementById("massa").value;
+      const tamanho = document.getElementById("tamanho").value;
+      const molho = document.getElementById("molho").value;
+      const coberturas = [];
+
+      if (document.getElementById("queijo").checked) coberturas.push("Queijo");
+      if (document.getElementById("calabresa").checked) coberturas.push("Calabresa");
+      if (document.getElementById("napolitana").checked) coberturas.push("Napolitana");
+      if (document.getElementById("frango").checked) coberturas.push("Frango");
+      if (document.getElementById("portuguesa").checked) coberturas.push("Portuguesa");
+
+      // Construir a pizza customizada
+      class Massa {
+        constructor(borda) {
+          this.borda = borda;
+        }
       }
 
-      alert(`Pedido enviado!\n\nCliente: ${nome}\nE-mail: ${email}\nPizza: ${pizza}\nQuantidade: ${quantidade}\nObservações: ${observacoes || 'Nenhuma'}`);
+      class Tamanho {
+        constructor(medida) {
+          this.medida = medida;
+        }
+      }
 
-      form.reset();
+      class Molho {
+        constructor(sabor) {
+          this.sabor = sabor;
+        }
+      }
+
+      class Coberturas {
+        constructor(sabores) {
+          this.sabores = sabores;
+        }
+      }
+
+      class Pizza {
+        constructor(massa, tamanho, molho, coberturas) {
+          this.massa = massa;
+          this.tamanho = tamanho;
+          this.molho = molho;
+          this.coberturas = coberturas;
+        }
+
+        mostrarPizza() {
+          return `
+            <h3>Sua Pizza Customizada:</h3>
+            <p><strong>Massa:</strong> ${this.massa.borda}</p>
+            <p><strong>Tamanho:</strong> ${this.tamanho.medida}</p>
+            <p><strong>Molho:</strong> ${this.molho.sabor}</p>
+            <p><strong>Coberturas:</strong> ${this.coberturas.sabores.join(', ')}</p>
+          `;
+        }
+      }
+
+      class PizzaBuilder {
+        constructor() {
+          this.massa = null;
+          this.tamanho = null;
+          this.molho = null;
+          this.coberturas = [];
+        }
+
+        addMassa(borda) {
+          this.massa = new Massa(borda);
+          return this;
+        }
+
+        addTamanho(medida) {
+          this.tamanho = new Tamanho(medida);
+          return this;
+        }
+
+        addMolho(sabor) {
+          this.molho = new Molho(sabor);
+          return this;
+        }
+
+        addCoberturas(sabores) {
+          this.coberturas = new Coberturas(sabores);
+          return this;
+        }
+
+        construir() {
+          return new Pizza(this.massa, this.tamanho, this.molho, this.coberturas);
+        }
+      }
+
+      // Montar a pizza
+      const builder = new PizzaBuilder();
+      const pizza = builder
+        .addCoberturas(coberturas)
+        .addMassa(massa)
+        .addMolho(molho)
+        .addTamanho(tamanho)
+        .construir();
+
+      resultDiv.innerHTML = pizza.mostrarPizza();
+      pizzaModal.style.display = "none"; // Fecha o modal após finalizar o pedido
     });
   </script>
+
 </body>
 </html>
