@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pizzaria Delícia - Faça seu pedido</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #fff8f0;
+      color: #333;
+      max-width: 600px;
+      margin: 2rem auto 4rem;
+      padding: 1rem 2rem;
+      line-height: 1.5;
+    }
+    header {
+      background: #d32f2f;
+      padding: 1rem 2rem;
+      color: white;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.8rem;
+    }
+    nav {
+      margin-top: 0.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffb74d;
+    }
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    button {
+      background: #d32f2f;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+    button:hover {
+      background: #b71c1c;
+    }
+    @media (max-width: 600px) {
+      body {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pizzaria Delícia</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/cardapio">Cardápio</a>
+      <a href="/pedido">Faça seu pedido</a>
+    </nav>
+  </header>
+
+  <main>
+    <form id="pedidoForm">
+      <h2>Faça seu pedido</h2>
+
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" placeholder="email@exemplo.com" required />
+
+      <label for="pizza">Escolha a pizza</label>
+      <select id="pizza" name="pizza" required>
+        <option value="" disabled selected>Selecione uma pizza</option>
+        <option value="Margherita">Margherita - R$35,00</option>
+        <option value="Calabresa">Calabresa - R$40,00</option>
+        <option value="Portuguesa">Portuguesa - R$45,00</option>
+        <option value="Frango com Catupiry">Frango com Catupiry - R$42,00</option>
+        <option value="Vegetariana">Vegetariana - R$38,00</option>
+      </select>
+
+      <label for="quantidade">Quantidade</label>
+      <input type="number" id="quantidade" name="quantidade" min="1" max="10" value="1" required />
+
+      <label for="observacoes">Observações (opcional)</label>
+      <textarea id="observacoes" name="observacoes" placeholder="Ex: Sem cebola, borda recheada..."></textarea>
+
+      <button type="submit">Enviar pedido</button>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('pedidoForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nome = form.nome.value.trim();
+      const email = form.email.value.trim();
+      const pizza = form.pizza.value;
+      const quantidade = form.quantidade.value;
+      const observacoes = form.observacoes.value.trim();
+
+      if (!nome || !email || !pizza || !quantidade) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+
+      alert(`Pedido enviado!\n\nCliente: ${nome}\nE-mail: ${email}\nPizza: ${pizza}\nQuantidade: ${quantidade}\nObservações: ${observacoes || 'Nenhuma'}`);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>

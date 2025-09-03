@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pizzaria Delícia - Cardápio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #fff8f0;
+      color: #333;
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem 2rem 4rem;
+      line-height: 1.5;
+    }
+    header {
+      background: #d32f2f;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+    }
+    header h1 {
+      font-size: 1.8rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffb74d;
+    }
+    h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 1.8rem;
+    }
+    .pizza-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      padding: 1.5rem;
+      transition: transform 0.3s;
+    }
+    .pizza-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+    }
+    .pizza-card h3 {
+      color: #d32f2f;
+      margin-bottom: 0.5rem;
+    }
+    .pizza-card p {
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .price {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+    }
+    footer {
+      background: #333;
+      color: #eee;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 1rem 3rem;
+      }
+      header {
+        justify-content: center;
+      }
+      nav a {
+        margin-left: 1rem;
+        font-size: 0.9rem;
+      }
+      h2 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pizzaria Delícia</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/cardapio">Cardápio</a>
+      <a href="/pedido">Faça seu pedido</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Nosso Cardápio</h2>
+    <div class="grid">
+      <div class="pizza-card">
+        <h3>Margherita</h3>
+        <p>Queijo mussarela, molho de tomate, manjericão fresco</p>
+        <div class="price">R$ 35,00</div>
+      </div>
+      <div class="pizza-card">
+        <h3>Calabresa</h3>
+        <p>Calabresa fatiada, cebola roxa, azeitonas pretas</p>
+        <div class="price">R$ 40,00</div>
+      </div>
+      <div class="pizza-card">
+        <h3>Portuguesa</h3>
+        <p>Presunto, ovo cozido, ervilha, cebola</p>
+        <div class="price">R$ 45,00</div>
+      </div>
+      <div class="pizza-card">
+        <h3>Frango com Catupiry</h3>
+        <p>Frango desfiado, catupiry, milho verde</p>
+        <div class="price">R$ 42,00</div>
+      </div>
+      <div class="pizza-card">
+        <h3>Vegetariana</h3>
+        <p>Tomate, pimentão, cebola, milho, azeitonas</p>
+        <div class="price">R$ 38,00</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Pizzaria Delícia. Todos os direitos reservados.
+  </footer>
+</body>
+</html>
