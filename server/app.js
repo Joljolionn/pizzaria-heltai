@@ -7,6 +7,8 @@ app.use('/', router)
 
 app.set('port', 4500)
 
+app.use(express.static('../public'));
+
 const server = app.listen(app.get('port'), () => {
 
     console.log("[OK] - Servidor em PORT " + server.address().port)
