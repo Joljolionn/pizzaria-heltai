@@ -30,6 +30,7 @@ class PizzaBuilder{
         this.tamanho = null;
         this.molho = null;
         this.coberturas = [];
+        this.preco = null;
     }
 
     addMassa(borda){
