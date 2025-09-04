@@ -1,0 +1,314 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #222;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+header {
+    background: #8e0005;
+    padding: 1rem 3rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 3px 6px rgb(213 28 28 / 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 100px;
+}
+
+header h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 0.3rem 0;
+    cursor: pointer;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: #ffe9d6;
+}
+
+main h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.grid {
+    padding: 0 20rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.pizza-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.pizza-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+}
+
+.pizza-card h3 {
+    color: #d32f2f;
+    margin-bottom: 0.5rem;
+}
+
+.pizza-card p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+footer {
+    width: 100%;
+    background-color: #222;
+    color: #bbb;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    padding: 1rem;
+    margin-top: 3rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 1rem 1rem 3rem;
+    }
+
+    header {
+        justify-content: center;
+    }
+
+    nav a {
+        margin-left: 1rem;
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+    }
+}
+button {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background: #b71c1c;
+}
+button:hover {
+    opacity: 1;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+button {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background: #b71c1c;
+}
+
+footer {
+    width: 100%;
+    background-color: #222;
+    color: #bbb;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    padding: 1rem;
+    margin-top: 3rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
+
+/* Estilos do modal */
+.modal {
+    display: none;
+    /* Esconde o modal inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo escuro */
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 700px;
+    text-align: center;
+}
+
+.close {
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    body {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+
+#fade,
+#modal {
+    transition: 0.5s;
+    opacity: 1;
+    pointer-events: all;
+}
+
+#fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+}
+
+#modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    z-index: 10;
+    width: 500px;
+    max-width: 90%;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-body p {
+    margin-bottom: 1rem;
+}
+
+#modal.hide,
+#fade.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#modal.hide {
+    top: 0;
+}
+
+#modal * {
+    margin: 15px;
+}

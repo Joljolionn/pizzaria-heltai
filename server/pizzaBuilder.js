@@ -1,31 +1,31 @@
-// Definindo Parte de um Carro:
-class Massa{
-    constructor(borda){
+// Definindo Parte de uma Pizza:
+class Massa {
+    constructor(borda) {
         this.borda = borda;
     }
 }
 
-class Tamanho{
-    constructor(medida){
+class Tamanho {
+    constructor(medida) {
         this.medida = medida;
     }
 }
 
-class Molho{
-    constructor(sabor){
+class Molho {
+    constructor(sabor) {
         this.sabor = sabor;
     }
 }
 
-class Coberturas{
-    constructor(sabores){
+class Coberturas {
+    constructor(sabores) {
         this.sabores = sabores;
     }
 }
 
 // Builder:
-class PizzaBuilder{
-    constructor(){
+class PizzaBuilder {
+    constructor() {
         this.massa = null;
         this.tamanho = null;
         this.molho = null;
@@ -33,61 +33,61 @@ class PizzaBuilder{
         this.preco = null;
     }
 
-    addMassa(borda){
+    addMassa(borda) {
         this.massa = new Massa(borda);
         return this;
     }
 
-    addTamanho(medida){
+    addTamanho(medida) {
         this.tamanho = new Tamanho(medida);
         return this;
     }
 
-    addMolho(sabor){
+    addMolho(sabor) {
         this.molho = new Molho(sabor);
         return this;
     }
 
-    addCoberturas(sabores){
+    addCoberturas(sabores) {
         this.coberturas = new Coberturas(sabores);
         return this;
     }
 
-    construir(){
+    construir() {
         return new Pizza(this.massa, this.tamanho, this.molho, this.coberturas);
     }
 }
 
-// Construir Carro:
-class Pizza{
-    constructor(massa, tamanho, molho, coberturas){
+// Construir Pizza:
+class Pizza {
+    constructor(massa, tamanho, molho, coberturas) {
         this.massa = massa;
         this.tamanho = tamanho;
         this.molho = molho;
         this.coberturas = coberturas;
     }
-    
-    mostrarPizza(){
-        console.log(`Pizza:
-            Massa: ${this.massa.borda}
-            Tamanho: ${this.tamanho.medida}
-            Molho: ${this.molho.sabor}
-            Coberturas: ${
-                this.coberturas.sabores.map((sabor) => { 
-                
-            return sabor}).join(', ')}`);
+
+    mostrarPizza() {
+        return {
+            Massa: this.massa.borda,
+            Tamanho: this.tamanho.medida,
+            Molho: this.molho.sabor,
+            Coberturas: this.coberturas.sabores
+        }
+    }
+}
+
+class Pedido {
+    // itens = [{Pizza, qtd}]
+    itens = []
+    adicionarItem(pizza, qtd) {
+        this.itens.push({pizza, qtd})
+    }
+    mostrarItens() {
+        return this.itens
     }
 }
 
 
-// USO DO MODELO BUILDER - Construindo um carro:
-const builder = new PizzaBuilder();
-
-const pizzaEsportiva = builder
-    .addCoberturas(["Queijo", "Calabresa", "Napolitana", "Portuguesa"])
-    .addMassa("crocante")
-    .addMolho("Tomate")
-    .addTamanho("Grande")
-    .construir()
-
-pizzaEsportiva.mostrarPizza();
+// USO DO MODELO BUILDER - Construindo uma Pizza:
+// const builder = new PizzaBuilder();
