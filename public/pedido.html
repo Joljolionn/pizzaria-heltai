@@ -20,21 +20,23 @@
 					<button id="close-modal">Fechar</button>
 				</div>
 				<div class="modal-body">
-					<div class="cart" id="cart">
-						<div class="cart-items" id="cart-items"></div>
-						<div class="total" id="total">Total: R$ 0.00</div>
-						<button onclick="checkout()">Finalizar Compra</button>
-					</div>
-					<div
-						class="payment-options"
-						id="payment-options"
-						style="display: none"
-					>
-						<h2>Escolha o método de pagamento</h2>
-						<button onclick="pay('Cartão')">Cartão</button>
-						<button onclick="pay('PIX')">PIX</button>
-					</div>
+				<div class="cart" id="cart">
+					<div class="cart-items" id="cart-items"></div>
+					<div class="total" id="total">Total: R$ 0.00</div>
+					<button id="finalizar-compra">
+						Finalizar Compra
+					</button>
 				</div>
+				<div
+					class="payment-options"
+					id="payment-options"
+					style="display: none"
+				>
+					<h2>Escolha o método de pagamento</h2>
+					<button id="cartao">Cartão</button>
+					<button id="pix">PIX</button>
+				</div>
+			</div>
 			</div>
 		<header>
 			<h1>Pizzaria Heltai</h1>

@@ -12,6 +12,8 @@ body {
     color: #222;
     line-height: 1.6;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -66,6 +68,10 @@ nav a:hover {
     color: #ffe9d6;
 }
 
+main {
+    flex: 1
+}
+
 main h2 {
     margin-bottom: 1.5rem;
     text-align: center;
@@ -73,7 +79,7 @@ main h2 {
 }
 
 .grid {
-    padding: 0 20rem;
+    padding: 0 20vw;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.8rem;
@@ -119,9 +125,6 @@ footer {
     font-size: 0.9rem;
     padding: 1rem;
     margin-top: 3rem;
-    position: absolute;
-    bottom: 0;
-    left: 0;
 }
 
 @media (max-width: 600px) {
@@ -209,10 +212,6 @@ footer {
     padding: 1.5rem;
     font-size: 0.9rem;
     padding: 1rem;
-    margin-top: 3rem;
-    position: absolute;
-    bottom: 0;
-    left: 0;
 }
 
 
@@ -311,4 +310,24 @@ footer {
 
 #modal * {
     margin: 15px;
+}
+
+.modal-preco {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-coberturas {
+    width: 100%;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modal-coberturas label {
+    margin: 10px; /* distancia cada label do outro */
+    display: flex;
+    align-items: center; /* alinha checkbox e texto */
 }

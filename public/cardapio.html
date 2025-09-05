@@ -8,80 +8,35 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 		/>
 		<link rel="stylesheet" href="./css/cardapio.css" />
-        <script defer src="./scripts/carrinho.js">
-            
-        </script>
-        <script defer src="./scripts/cardapio.js">
-            
-        </script>
+		<script defer src="./scripts/carrinho.js"></script>
+		<script defer src="./scripts/cardapio.js"></script>
 		<title>Pizzaria Heltai - Cardápio</title>
 	</head>
 	<body>
-        <div id="modal" class="hide">
-            <div class="modal-header">
-                <h2>Meu carrinho</h2>
-                <button id="close-modal">Fechar</button>
-            </div>
-            <div class="modal-body">
-                <div class="cart" id="cart">
-                    <div class="cart-items" id="cart-items"></div>
-                    <div class="total" id="total">Total: R$ 0.00</div>
-                    <button onclick="checkout()">Finalizar Compra</button>
-                </div>
-                <div
-                        class="payment-options"
-                        id="payment-options"
-                        style="display: none"
-                        >
-                        <h2>Escolha o método de pagamento</h2>
-                        <button onclick="pay('Cartão')">Cartão</button>
-                        <button onclick="pay('PIX')">PIX</button>
-                </div>
-            </div>
-        </div>
-		<!-- Modal para personalizar a pizza -->
-		<div id="pizzaModal" class="modal">
-			<div class="modal-content">
-				<span class="close" id="closeModalBtn">&times;</span>
-				<h2>Personalize sua pizza</h2>
-
-				<label for="massa">Escolha a Massa (Borda)</label>
-				<select id="massa">
-					<option value="Crocante">Crocante</option>
-					<option value="Normal">Normal</option>
-					<option value="Recheada">Recheada</option>
-				</select>
-
-				<label for="tamanho">Escolha o Tamanho</label>
-				<select id="tamanho">
-					<option value="Pequena">Pequena</option>
-					<option value="Média">Média</option>
-					<option value="Grande">Grande</option>
-				</select>
-
-				<label for="molho">Escolha o Molho</label>
-				<select id="molho">
-					<option value="Tomate">Tomate</option>
-					<option value="Barbecue">Barbecue</option>
-					<option value="Branco">Branco</option>
-				</select>
-
-				<label>Coberturas</label>
-				<div>
-					<input type="checkbox" id="queijo" /> Queijo
-					<input type="checkbox" id="calabresa" /> Calabresa
-					<input type="checkbox" id="napolitana" /> Napolitana
-					<input type="checkbox" id="frango" /> Frango
-					<input type="checkbox" id="portuguesa" /> Portuguesa
+		<div id="modal" class="hide">
+			<div class="modal-header">
+				<h2>Meu carrinho</h2>
+				<button id="close-modal">Fechar</button>
+			</div>
+			<div class="modal-body">
+				<div class="cart" id="cart">
+					<div class="cart-items" id="cart-items"></div>
+					<div class="total" id="total">Total: R$ 0.00</div>
+					<button id="finalizar-compra">Finalizar Compra</button>
 				</div>
-
-				<button id="finalizarPedidoBtn">Finalizar Pedido</button>
+				<div
+					class="payment-options"
+					id="payment-options"
+					style="display: none"
+				>
+					<h2>Escolha o método de pagamento</h2>
+					<button id="cartao">Cartão</button>
+					<button id="pix">PIX</button>
+				</div>
 			</div>
 		</div>
-
-
+		
 		<header>
-
 			<h1>Pizzaria Heltai</h1>
 			<nav>
 				<a href="/">Home</a>
@@ -95,29 +50,29 @@
 		</header>
 
 		<main>
-            <h2>Nosso Cardápio</h2>
+			<h2>Nosso Cardápio</h2>
 			<div class="grid">
-				<div class="pizza-card">
+				<div class="pizza-card" id="pizza-margherita">
 					<h3>Margherita</h3>
 					<p>Queijo mussarela, molho de tomate, manjericão fresco</p>
 					<div class="price">R$ 35,00</div>
 				</div>
-				<div class="pizza-card">
+				<div class="pizza-card" id="pizza-calabresa">
 					<h3>Calabresa</h3>
 					<p>Calabresa fatiada, cebola roxa, azeitonas pretas</p>
 					<div class="price">R$ 40,00</div>
 				</div>
-				<div class="pizza-card">
+				<div class="pizza-card" id="pizza-portuguesa">
 					<h3>Portuguesa</h3>
 					<p>Presunto, ovo cozido, ervilha, cebola</p>
 					<div class="price">R$ 45,00</div>
 				</div>
-				<div class="pizza-card">
+				<div class="pizza-card" id="pizza-frango">
 					<h3>Frango com Catupiry</h3>
 					<p>Frango desfiado, catupiry, milho verde</p>
 					<div class="price">R$ 42,00</div>
 				</div>
-				<div class="pizza-card">
+				<div class="pizza-card" id="pizza-vegetariana">
 					<h3>Vegetariana</h3>
 					<p>Tomate, pimentão, cebola, milho, azeitonas</p>
 					<div class="price">R$ 38,00</div>
@@ -125,7 +80,7 @@
 				<div class="pizza-card" id="custom">
 					<h3>Á Moda do Cliente</h3>
 					<p>Monte sua própria pizza!</p>
-					<div class="price">R$ 50,00</div>
+					<div class="price">R$ 22,00 - R$ 88,00</div>
 				</div>
 			</div>
 		</main>

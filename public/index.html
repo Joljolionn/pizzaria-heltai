@@ -8,33 +8,35 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 		/>
-        <script defer src="./scripts/carrinho.js"></script>
+		<script defer src="./scripts/carrinho.js"></script>
 		<title>Pizzaria Heltai - Home</title>
 	</head>
 	<body>
-            <div id="modal" class="hide">
-				<div class="modal-header">
-					<h2>Meu carrinho</h2>
-					<button id="close-modal">Fechar</button>
+		<div id="modal" class="hide">
+			<div class="modal-header">
+				<h2>Meu carrinho</h2>
+				<button id="close-modal">Fechar</button>
+			</div>
+			<div class="modal-body">
+				<div class="cart" id="cart">
+					<div class="cart-items" id="cart-items"></div>
+					<div class="total" id="total">Total: R$ 0.00</div>
+					<button id="finalizar-compra">
+						Finalizar Compra
+					</button>
 				</div>
-				<div class="modal-body">
-					<div class="cart" id="cart">
-						<div class="cart-items" id="cart-items"></div>
-						<div class="total" id="total">Total: R$ 0.00</div>
-						<button onclick="checkout()">Finalizar Compra</button>
-					</div>
-					<div
-						class="payment-options"
-						id="payment-options"
-						style="display: none"
-					>
-						<h2>Escolha o método de pagamento</h2>
-						<button onclick="pay('Cartão')">Cartão</button>
-						<button onclick="pay('PIX')">PIX</button>
-					</div>
+				<div
+					class="payment-options"
+					id="payment-options"
+					style="display: none"
+				>
+					<h2>Escolha o método de pagamento</h2>
+					<button id="cartao">Cartão</button>
+					<button id="pix">PIX</button>
 				</div>
 			</div>
-       		<header>
+		</div>
+		<header>
 			<h1>Pizzaria Heltai</h1>
 			<nav>
 				<a href="/">Home</a>
@@ -45,7 +47,6 @@
 					<i class="fa-solid fa-cart-shopping"></i>
 				</a>
 			</nav>
-
 		</header>
 
 		<main>
