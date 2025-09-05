@@ -220,7 +220,73 @@ function calcularPrecoPizza() {
 }
 
 // Finalizar pedido
+
+// --- Classes do Builder + Pizza (coloque perto do resto do código) ---
+class Massa {
+	constructor(borda) { this.borda = borda; }
+}
+class Tamanho {
+	constructor(medida) { this.medida = medida; }
+}
+class Molho {
+	constructor(sabor) { this.sabor = sabor; }
+}
+class Coberturas {
+	constructor(sabores) { this.sabores = sabores; }
+}
+
+class Pizza {
+	constructor(massa, tamanho, molho, coberturas, preco = 0) {
+		this.massa = massa;
+		this.tamanho = tamanho;
+		this.molho = molho;
+		this.coberturas = coberturas;
+		this.preco = preco;
+	}
+
+	// retorna descrição textual pra colocar no carrinho
+	getDescription() {
+		const massa = this.massa?.borda ?? "N/A";
+		const tamanho = this.tamanho?.medida ?? "N/A";
+		const molho = this.molho?.sabor ?? "N/A";
+		const coberturas = (this.coberturas?.sabores && this.coberturas.sabores.length)
+			? this.coberturas.sabores.join(", ")
+			: "Nenhuma";
+		return `Pizza ${tamanho} com massa ${massa}, molho de ${molho}` +
+			(this.coberturas?.sabores?.length ? ` e coberturas: ${coberturas}` : "");
+	}
+
+	toPlainObject() {
+		// útil se quiser salvar o objeto no localStorage depois
+		return {
+			massa: this.massa?.borda,
+			tamanho: this.tamanho?.medida,
+			molho: this.molho?.sabor,
+			coberturas: this.coberturas?.sabores || [],
+			preco: this.preco
+		};
+	}
+}
+
+class PizzaBuilder {
+	constructor() {
+		this.massa = null;
+		this.tamanho = null;
+		this.molho = null;
+		this.coberturas = [];
+		this.preco = 0;
+	}
+	addMassa(borda) { this.massa = new Massa(borda); return this; }
+	addTamanho(medida) { this.tamanho = new Tamanho(medida); return this; }
+	addMolho(sabor) { this.molho = new Molho(sabor); return this; }
+	addCoberturas(sabores) { this.coberturas = new Coberturas(sabores); return this; }
+	setPreco(valor) { this.preco = Number(valor) || 0; return this; }
+	build() { return new Pizza(this.massa, this.tamanho, this.molho, this.coberturas, this.preco); }
+}
+
+// --- Substitua o listener atual por este (ou troque a parte interna dele) ---
 finalizarPedidoBtn.addEventListener("click", function () {
+	// pega os valores do modal
 	const massa = document.getElementById("massa").value;
 	const tamanho = document.getElementById("tamanho").value;
 	const molho = document.getElementById("molho").value;
@@ -229,25 +295,41 @@ finalizarPedidoBtn.addEventListener("click", function () {
 	document
 		.querySelectorAll(".modal-coberturas input[type='checkbox']")
 		.forEach((c) => {
-			if (c.checked)
-				coberturas.push(c.id.charAt(0).toUpperCase() + c.id.slice(1));
+			if (c.checked) coberturas.push(c.id.charAt(0).toUpperCase() + c.id.slice(1));
 		});
 
-	// Montar descrição da pizza
-	const descricao =
-		 `Pizza ${tamanho.charAt(0).toUpperCase() + tamanho.slice(1)} com massa ${massa}, molho de ${molho}` +
-		(coberturas.length ? ` e coberturas: ${coberturas.join(", ")}` : "");
-
-	// Calcula preço
+	// calcula preço com sua função existente
 	const preco = calcularPrecoPizza();
 
-	// Adiciona no carrinho
-	addToCart(descricao, preco);
+	// usa o Builder para montar a pizza
+	const builder = new PizzaBuilder();
+	const pizza = builder
+		.addMassa(massa)
+		.addTamanho(tamanho)
+		.addMolho(molho)
+		.addCoberturas(coberturas)
+		.setPreco(preco)
+		.build();
 
-	// Fecha modal
+	// descrição e adição ao carrinho
+	const descricao = pizza.getDescription();
+	addToCart(descricao, pizza.preco);
+
+	// (opcional) se quiser armazenar o objeto pizza completo no cart/localStorage,
+	// você pode mudar addToCart para aceitar um objeto, ou criar outra função.
+	// Ex.: cart.push(pizza.toPlainObject()); localStorage.setItem('cart', JSON.stringify(cart))
+
+	// mostra ao usuário e fecha modal (como antes)
+	resultDiv.innerHTML = `
+		<h3>Sua Pizza Customizada:</h3>
+		<p><strong>Massa:</strong> ${pizza.massa.borda}</p>
+		<p><strong>Tamanho:</strong> ${pizza.tamanho.medida}</p>
+		<p><strong>Molho:</strong> ${pizza.molho.sabor}</p>
+		<p><strong>Coberturas:</strong> ${pizza.coberturas.sabores.join(", ") || "Nenhuma"}</p>
+		<p><strong>Preço:</strong> R$ ${pizza.preco.toFixed(2)}</p>
+	`;
 	pizzaModal.style.display = "none";
 });
-
 document.getElementById("pizza-margherita").addEventListener("click", () => addToCart("Pizza Margherita", 35))
 document.getElementById("pizza-calabresa").addEventListener("click", () => addToCart("Pizza Calabresa", 35))
 document.getElementById("pizza-portuguesa").addEventListener("click", () => addToCart("Pizza Portuguesa", 35))

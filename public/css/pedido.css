@@ -67,6 +67,17 @@ nav a:hover {
     color: #ffe9d6;
 }
 
+main {
+    flex: 1
+}
+main div{
+    padding: 30px;
+}
+
+main div ul {
+    margin-left: 30px;
+}
+
 form {
     background: white;
     padding: 2rem;
@@ -123,9 +134,6 @@ footer {
     font-size: 0.9rem;
     padding: 1rem;
     margin-top: 3rem;
-    position: absolute;
-    bottom: 0;
-    left: 0;
 }
 
 
