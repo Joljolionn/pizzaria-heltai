@@ -18,8 +18,10 @@ openModalButton?.addEventListener("click", (e) => {
 	el.addEventListener("click", toggleModal);
 });
 
-let cart = [];
-let total = 0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = cart.reduce((sum, item) => sum + item.price, 0); // recalcula total
+
+updateCart(); // Atualiza o DOM com os itens do localStorage
 
 function addToCart(name, price) {
 	price = Number(price);
@@ -41,6 +43,7 @@ function updateCart() {
 	});
 
 	totalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
+    localStorage.setItem("cart", JSON.stringify(cart))
 }
 
 function checkout() {
@@ -53,10 +56,13 @@ function checkout() {
 
 function pay(method) {
 	alert(`Pagamento realizado com ${method}. Total: R$ ${total.toFixed(2)}`);
-	cart = [];
-	total = 0;
 	updateCart();
 	document.getElementById("payment-options").style.display = "none";
+    const pedidos = JSON.parse(localStorage.getItem('pedidos')) || []
+    pedidos.push(cart)
+    localStorage.setItem("pedidos", JSON.stringify(pedidos))
+    cart = []
+    localStorage.setItem("cart", JSON.stringify(cart))
 	toggleModal();
 }
 

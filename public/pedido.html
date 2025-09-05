@@ -8,24 +8,22 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 		/>
-        <script defer src="./scripts/pedido.js"></script>
-        <script defer src="./scripts/carrinho.js"></script>
+		<script defer src="./scripts/pedido.js"></script>
+		<script defer src="./scripts/carrinho.js"></script>
 		<title>Pizzaria Heltai - Seus pedidos</title>
 	</head>
 
 	<body>
-<div id="modal" class="hide">
-				<div class="modal-header">
-					<h2>Meu carrinho</h2>
-					<button id="close-modal">Fechar</button>
-				</div>
-				<div class="modal-body">
+		<div id="modal" class="hide">
+			<div class="modal-header">
+				<h2>Meu carrinho</h2>
+				<button id="close-modal">Fechar</button>
+			</div>
+			<div class="modal-body">
 				<div class="cart" id="cart">
 					<div class="cart-items" id="cart-items"></div>
 					<div class="total" id="total">Total: R$ 0.00</div>
-					<button id="finalizar-compra">
-						Finalizar Compra
-					</button>
+					<button id="finalizar-compra">Finalizar Compra</button>
 				</div>
 				<div
 					class="payment-options"
@@ -37,11 +35,11 @@
 					<button id="pix">PIX</button>
 				</div>
 			</div>
-			</div>
+		</div>
 		<header>
 			<h1>Pizzaria Heltai</h1>
-			
-<nav>
+
+			<nav>
 				<a href="/">Home</a>
 				<a href="/cardapio">Cardápio</a>
 				<a href="/pedido">Faça seu pedido</a>
@@ -50,78 +48,14 @@
 					<i class="fa-solid fa-cart-shopping"></i>
 				</a>
 			</nav>
-
 		</header>
 
-		<main>
-			<form id="pedidoForm">
-				<h2>Faça seu pedido</h2>
-
-				<label for="nome">Nome completo</label>
-				<input
-					type="text"
-					id="nome"
-					name="nome"
-					placeholder="Seu nome"
-					required
-				/>
-
-				<label for="email">E-mail</label>
-				<input
-					type="email"
-					id="email"
-					name="email"
-					placeholder="email@exemplo.com"
-					required
-				/>
-
-				<label for="pizza">Escolha a pizza</label>
-				<select id="pizza" name="pizza" required>
-					<option value="" disabled selected>
-						Selecione uma pizza
-					</option>
-					<option value="Margherita">Margherita - R$35,00</option>
-					<option value="Calabresa">Calabresa - R$40,00</option>
-					<option value="Portuguesa">Portuguesa - R$45,00</option>
-					<option value="Frango com Catupiry">
-						Frango com Catupiry - R$42,00
-					</option>
-					<option value="Vegetariana">Vegetariana - R$38,00</option>
-					<option value="Customizada">
-						Á moda do Cliente - R$50,00
-					</option>
-				</select>
-
-				<div class=""></div>
-
-				<div id="result"></div>
-
-				<label for="quantidade">Quantidade</label>
-				<input
-					type="number"
-					id="quantidade"
-					name="quantidade"
-					min="1"
-					max="10"
-					value="1"
-					required
-				/>
-
-				<label for="observacoes">Observações (opcional)</label>
-				<textarea
-					id="observacoes"
-					name="observacoes"
-					placeholder="Ex: Sem cebola, borda recheada..."
-				></textarea>
-
-				<button type="submit">Enviar pedido</button>
-			</form>
-		</main>
-
+		<main class="corpo">
+                       
+        </main>
 
 		<footer>
 			&copy; 2025 Pizzaria Heltai. Todos os direitos reservados.
 		</footer>
-		
 	</body>
 </html>
